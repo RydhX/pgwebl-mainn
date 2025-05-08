@@ -9,6 +9,9 @@ use App\Models\PolygonsModel;
 
 class ApiController extends Controller
 {
+    protected $points;
+    protected $polylines;
+    protected $polygons;
     public function __construct()
     {
         $this->points = new PointsModel();

@@ -280,22 +280,27 @@
             return L.marker(latlng);
             },
             onEachFeature: function(feature, layer) {
-            const template = "{{ route('points.destroy', ':id') }}";
-            const deleteUrl = template.replace(':id', feature.properties.id);
+            const deleteTemplate = "{{ route('points.destroy', ':id') }}";
+            const deleteUrl = deleteTemplate.replace(':id', feature.properties.id);
+            const editTemplate = "{{ route('points.edit', ':id') }}";
+            const editUrl = editTemplate.replace(':id', feature.properties.id);
             const csrf = "{{ csrf_token() }}";
 
             const popup = `
-                <strong>${feature.properties.name}</strong><br>
-                ${feature.properties.description}<br>
-                <img src="{{ asset('storage/images') }}/${feature.properties.images}" width="200"><br>
-                <form action="${deleteUrl}" method="POST" onsubmit="return confirm('Yakin mau dihapus?')">
+            <strong>${feature.properties.name}</strong><br>
+            ${feature.properties.description}<br>
+            <img src="{{ asset('storage/images') }}/${feature.properties.images}" width="200" class="mb-2"><br>
+            <a href="${editUrl}" class="btn btn-sm btn-warning me-2">
+                <i class="fa-solid fa-pen"></i> Edit
+            </a>
+            <form action="${deleteUrl}" method="POST" onsubmit="return confirm('Yakin mau dihapus?')" style="display:inline;">
                 <input type="hidden" name="_token" value="${csrf}">
                 <input type="hidden" name="_method" value="DELETE">
                 <button class="btn btn-sm btn-danger">
                 <i class="fa-solid fa-trash-can"></i> Hapus
                 </button>
-                </form>
-                `;
+            </form>
+            `;
             layer.bindPopup(popup);
             layer.bindTooltip(feature.properties.name, {
                 sticky: true
@@ -318,23 +323,28 @@
             };
             },
             onEachFeature: function(feature, layer) {
-            const template = "{{ route('polylines.destroy', ':id') }}";
-            const deleteUrl = template.replace(':id', feature.properties.id);
+            const deleteTemplate = "{{ route('polylines.destroy', ':id') }}";
+            const deleteUrl = deleteTemplate.replace(':id', feature.properties.id);
+            const editTemplate = "{{ route('polylines.edit', ':id') }}";
+            const editUrl = editTemplate.replace(':id', feature.properties.id);
             const csrf = "{{ csrf_token() }}";
 
             const popup = `
-                <strong>${feature.properties.name}</strong><br>
-                ${feature.properties.description}<br>
-                Panjang: ${feature.properties.length_km.toFixed(5)} km<br>
-                <img src="{{ asset('storage/images') }}/${feature.properties.images}" width="200"><br>
-                <form action="${deleteUrl}" method="POST" onsubmit="return confirm('Yakin mau dihapus?')">
+            <strong>${feature.properties.name}</strong><br>
+            ${feature.properties.description}<br>
+            Panjang: ${feature.properties.length_km.toFixed(5)} km<br>
+            <img src="{{ asset('storage/images') }}/${feature.properties.images}" width="200" class="mb-2"><br>
+            <a href="${editUrl}" class="btn btn-sm btn-warning me-2">
+                <i class="fa-solid fa-pen"></i> Edit
+            </a>
+            <form action="${deleteUrl}" method="POST" onsubmit="return confirm('Yakin mau dihapus?')" style="display:inline;">
                 <input type="hidden" name="_token" value="${csrf}">
                 <input type="hidden" name="_method" value="DELETE">
                 <button class="btn btn-sm btn-danger">
                 <i class="fa-solid fa-trash-can"></i> Hapus
                 </button>
-                </form>
-                `;
+            </form>
+            `;
             layer.bindPopup(popup);
             layer.bindTooltip(feature.properties.name, {
                 sticky: true
@@ -359,23 +369,28 @@
             };
             },
             onEachFeature: function(feature, layer) {
-            const template = "{{ route('polygons.destroy', ':id') }}";
-            const deleteUrl = template.replace(':id', feature.properties.id);
+            const deleteTemplate = "{{ route('polygons.destroy', ':id') }}";
+            const deleteUrl = deleteTemplate.replace(':id', feature.properties.id);
+            const editTemplate = "{{ route('polygons.edit', ':id') }}";
+            const editUrl = editTemplate.replace(':id', feature.properties.id);
             const csrf = "{{ csrf_token() }}";
 
             const popup = `
-                <strong>${feature.properties.name}</strong><br>
-                ${feature.properties.description}<br>
-                Luas: ${feature.properties.area_hectare.toFixed(3)} Ha<br>
-                <img src="{{ asset('storage/images') }}/${feature.properties.images}" width="200"><br>
-                <form action="${deleteUrl}" method="POST" onsubmit="return confirm('Yakin mau dihapus?')">
+            <strong>${feature.properties.name}</strong><br>
+            ${feature.properties.description}<br>
+            Luas: ${feature.properties.area_hectare.toFixed(3)} Ha<br>
+            <img src="{{ asset('storage/images') }}/${feature.properties.images}" width="200" class="mb-2"><br>
+            <a href="${editUrl}" class="btn btn-sm btn-warning me-2">
+                <i class="fa-solid fa-pen"></i> Edit
+            </a>
+            <form action="${deleteUrl}" method="POST" onsubmit="return confirm('Yakin mau dihapus?')" style="display:inline;">
                 <input type="hidden" name="_token" value="${csrf}">
                 <input type="hidden" name="_method" value="DELETE">
                 <button class="btn btn-sm btn-danger">
                 <i class="fa-solid fa-trash-can"></i> Hapus
                 </button>
-                </form>
-                `;
+            </form>
+            `;
             layer.bindPopup(popup);
             layer.bindTooltip(feature.properties.name, {
                 sticky: true
