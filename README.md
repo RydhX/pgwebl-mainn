@@ -1,11 +1,11 @@
 
 <h1 align="center">
   <img src="https://img.icons8.com/nolan/64/data-in-both-directions.png" width="40"/>
-  PGWL - Acara 7 Report
+  PGWL - Acara 9 - Button Edit
 </h1>
 
 <p align="center">
-  <b>Praktikum Pengembangan Geospasial Web Lanjut (PGWL)</b><br>
+  <b>Praktikum Geospasial Web Lanjut (PGWL)</b><br>
   Acara 7 - Sistem Informasi Geografis | Universitas Gadjah Mada
 </p>
 
@@ -24,7 +24,7 @@
 | 👤 Nama | **Ridho Alif Utama** |
 | 🆔 NIM | **23/518259/SV/22935** |
 | 🧭 Prodi | **Sistem Informasi Geografis** |
-| 🧪 Praktikum | **PGWL - Acara 7** |
+| 🧪 Praktikum | **PGWL - Acara 9** |
 
 ---
 
@@ -70,7 +70,7 @@ public function update(Request $request, string $id)
 ## ✉️ KONTAK
 
 - 📧 Email : [ridhoalifutama@mail.ugm.ac.id](mailto:ridhoalifutama@mail.ugm.ac.id)
-- 💻 GitHub: [github.com/ridhoalifutama](https://github.com/)
+- 💻 GitHub: [github.com/rydhx](https://github.com/)
 
 ---
 
