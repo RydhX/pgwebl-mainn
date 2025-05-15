@@ -282,7 +282,7 @@
             onEachFeature: function(feature, layer) {
             const deleteTemplate = "{{ route('points.destroy', ':id') }}";
             const deleteUrl = deleteTemplate.replace(':id', feature.properties.id);
-            const editTemplate = "{{ route('points.edit', ':id') }}";
+            const editTemplate = "{{ route('points.update', ':id') }}";
             const editUrl = editTemplate.replace(':id', feature.properties.id);
             const csrf = "{{ csrf_token() }}";
 
@@ -290,9 +290,9 @@
             <strong>${feature.properties.name}</strong><br>
             ${feature.properties.description}<br>
             <img src="{{ asset('storage/images') }}/${feature.properties.images}" width="200" class="mb-2"><br>
-            <a href="${editUrl}" class="btn btn-sm btn-warning me-2">
+            <button class="btn btn-sm btn-warning me-2" onclick="openEditModal('${feature.properties.id}', '${feature.properties.name}', '${feature.properties.description}', '${feature.properties.images}')">
                 <i class="fa-solid fa-pen"></i> Edit
-            </a>
+            </button>
             <form action="${deleteUrl}" method="POST" onsubmit="return confirm('Yakin mau dihapus?')" style="display:inline;">
                 <input type="hidden" name="_token" value="${csrf}">
                 <input type="hidden" name="_method" value="DELETE">
@@ -416,5 +416,81 @@
             reader.readAsDataURL(input.files[0]);
         }
 
+        //Modal Edit
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="editForm" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="editName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="editName" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="editDescription" name="description" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editImage" class="form-label">Photo</label>
+                                <input type="file" class="form-control" id="editImage" name="image" onchange="previewEditImage(event)">
+                                <div class="mt-3">
+                                    <img id="editImagePreview" src="" class="img-thumbnail" style="max-width: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function previewEditImage(event) {
+                var input = event.target;
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    var img = document.getElementById('editImagePreview');
+                    img.src = reader.result;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        </script>
+
+        <script>
+            function openEditModal(id, name, description, image) {
+                // Set form action URL
+                const editUrl = "{{ route('points.update', ':id') }}".replace(':id', id);
+                document.getElementById('editForm').action = editUrl;
+
+                // Set form fields
+                document.getElementById('editName').value = name;
+                document.getElementById('editDescription').value = description;
+
+                // Set image preview
+                const imagePreview = document.getElementById('editImagePreview');
+                if (image) {
+                    imagePreview.src = "{{ asset('storage/images') }}/" + image;
+                } else {
+                    imagePreview.src = '';
+                }
+
+                // Show modal
+                const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                editModal.show();
+            }
+        </script>
+
     </script>
+
 @endsection
