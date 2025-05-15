@@ -78,6 +78,58 @@
     </div>
 
 
+    //Modal Edit
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="editForm" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="editName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="editName" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="editDescription" name="description" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editImage" class="form-label">Photo</label>
+                                <input type="file" class="form-control" id="editImage" name="image" onchange="previewEditImage(event)">
+                                <div class="mt-3">
+                                    <img id="editImagePreview" src="" class="img-thumbnail" style="max-width: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function previewEditImage(event) {
+                var input = event.target;
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    var img = document.getElementById('editImagePreview');
+                    img.src = reader.result;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        </script>
+
+
     <!-- Modal Create Polyline -->
     <div class="modal fade" id="CreatePolylineModal" tabindex="-1" aria-labelledby="CreatePolylineLabel"
         aria-hidden="true">
@@ -415,57 +467,6 @@
 
             reader.readAsDataURL(input.files[0]);
         }
-
-        //Modal Edit
-        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form id="editForm" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="editName" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="editName" name="name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="editDescription" class="form-label">Description</label>
-                                <textarea class="form-control" id="editDescription" name="description" rows="3"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="editImage" class="form-label">Photo</label>
-                                <input type="file" class="form-control" id="editImage" name="image" onchange="previewEditImage(event)">
-                                <div class="mt-3">
-                                    <img id="editImagePreview" src="" class="img-thumbnail" style="max-width: 200px;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            function previewEditImage(event) {
-                var input = event.target;
-                var reader = new FileReader();
-
-                reader.onload = function() {
-                    var img = document.getElementById('editImagePreview');
-                    img.src = reader.result;
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        </script>
 
         <script>
             function openEditModal(id, name, description, image) {

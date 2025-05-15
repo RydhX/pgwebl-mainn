@@ -119,4 +119,12 @@ class PointsController extends Controller
         }
         return redirect()->route('map')->with('success', 'Point has been deleted successfully');
     }
+
+    public function getPoints()
+{
+    $points = $this->points->all();
+
+    return response()->json($points);
+}
+
 }
