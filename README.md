@@ -1,12 +1,12 @@
 
 <h1 align="center">
   <img src="https://img.icons8.com/nolan/64/data-in-both-directions.png" width="40"/>
-  PGWL - Acara 9 - Button Edit
+  PGWL - Acara 11 - Middleware, Dashboard, dan lain lain.
 </h1>
 
 <p align="center">
   <b>Praktikum Geospasial Web Lanjut (PGWL)</b><br>
-  Acara 7 - Sistem Informasi Geografis | Universitas Gadjah Mada
+  Acara 11 - Sistem Informasi Geografis | Universitas Gadjah Mada
 </p>
 
 <p align="center">
@@ -24,7 +24,7 @@
 | 👤 Nama | **Ridho Alif Utama** |
 | 🆔 NIM | **23/518259/SV/22935** |
 | 🧭 Prodi | **Sistem Informasi Geografis** |
-| 🧪 Praktikum | **PGWL - Acara 9** |
+| 🧪 Praktikum | **PGWL - Acara 11** |
 
 ---
 
@@ -52,7 +52,7 @@ public function update(Request $request, string $id)
 
 ---
 
-## 🎯 FITUR ACARA 7
+## 🎯 FITUR WEBGIS
 
 - Menampilkan form edit data (view)
 - Memproses update data dengan HTTP PATCH
